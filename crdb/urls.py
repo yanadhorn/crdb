@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
 #this is for RestAPI
-from updates.views import update_model_detail_view
+from updates.views import json_example_view
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,7 +43,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path(r'^', include(router.urls)),
-    path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('^', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('json/example/', json_example_view),
 ]
