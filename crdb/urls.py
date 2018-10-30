@@ -45,5 +45,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path(r'^', include(router.urls)),
     path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('json/example', json_example_view),
+    path('json/example/', json_example_view),
 ]

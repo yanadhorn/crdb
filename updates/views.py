@@ -1,4 +1,5 @@
 import json
+
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View

@@ -19,7 +19,7 @@ class education_grade(models.Model):
 class education(models.Model):
     edu_id = models.AutoField(primary_key=True)
     edu_name = models.CharField(max_length=255)
-    education_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
+    edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
 
 class Person(models.Model):
     person_id = models.AutoField(primary_key=True)
