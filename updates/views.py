@@ -6,6 +6,7 @@ from django.views.generic import View
 
 from crdb.mixins import JsonResponseMixin
 from .models import Update
+from django.core.serializers import serialize
 # Create your views here.
 # def detail_view(request):
 #     return render() # return JSON data XML - > JS Object Notion
@@ -39,3 +40,15 @@ class JsonCBV2(JsonResponseMixin, View):
             "content": "Some new content"
         }
         return self.render_to_json_response(data)
+
+class SerializedDetailViewb(View):
+    def get(self,request,*args, **kwargs):
+        obj = Update.objects.get(id=1)
+        json_data = obj.serialize()
+        return HttpResponse(json_data, content_type='application/json')
+
+class SerializedListViewb(View):
+    def get(self,request,*args, **kwargs):
+        qs = Update.objects.all()
+        json_data = qs.serialize()
+        return HttpResponse(json_data, content_type='application/json')
