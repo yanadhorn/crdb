@@ -13,7 +13,12 @@ class organization(models.Model):
     org_fund = models.CharField(max_length=255)
 
 class education_grade(models.Model):
-    edu_grade = models.choices(max_length=255)
+    edugrade = (
+        ('x','x1'),
+        ('y', 'y1'),
+        ('z', 'z1'),
+    )
+    edu_grade = models.CharField(max_length=200, choices = edugrade)
 
 
 class education(models.Model):
@@ -44,4 +49,3 @@ class Person(models.Model):
     twitter = models.CharField(max_length=255)
     instagram = models.CharField(max_length=255)
     remark = models.TextField()
-

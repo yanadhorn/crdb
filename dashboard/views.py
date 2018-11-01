@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 # Create your views here.
-def home(request):
-    return render(request, 'dashboard/base.html', {'home': home})
+def dashboard(request):
+    return render(request, 'dashboard/templates/base.html', {'dashboard': dashboard})
