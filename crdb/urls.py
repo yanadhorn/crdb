@@ -15,39 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 from django.conf.urls import url
-from dashboard import views
+# from dashboard import views
+import dashboard.views
+from django.conf.urls.static import static
 from django.contrib.auth.models import User
-# from rest_framework import routers, serializers, viewsets
-
-
-# #this is for RestAPI
-# from updates.views import json_example_view, JsonCBV, JsonCBV2, SerializedDetailViewb, SerializedListViewb
-
-# # Serializers define the API representation.
-# class UserSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('url', 'username', 'email', 'is_staff')
-
-# # ViewSets define the view behavior.
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-# # Routers provide an easy way of automatically determining the URL conf.
-# router = routers.DefaultRouter()
-# router.register(r'users', UserViewSet)
-
-# import dashboard.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.dashboard, name='dashboard'),
+    path('', dashboard.views.dashboard, name='dashboard'),
+    # path('', views.dashboard, name='dashboard'),
     # path('^', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # path('json/cbv/',JsonCBV.as_view()),
-    # path('json/cbv2/',JsonCBV2.as_view()),
-    # path('json/example/', json_example_view),
-    # path('json/serialized/list/', SerializedListViewb.as_view()),
 ]
