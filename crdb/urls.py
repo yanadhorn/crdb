@@ -23,8 +23,9 @@ from django.conf.urls.static import static
 from django.contrib.auth.models import User
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', dashboard.views.dashboard, name='dashboard'),
-    # path('', views.dashboard, name='dashboard'),
+    path('admin/', admin.site.urls),
+    path('dashboard/', include('django.contrib.auth.urls')),
+    # path('', dashboard.views.dashboard, name='user_login'),
     # path('^', include(router.urls)),
 ]
