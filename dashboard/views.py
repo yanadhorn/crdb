@@ -16,21 +16,21 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('dashboard'))
 
-def user_login(request):
-    if request == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username,password=password)
-        if user:
-            if user.is_active:
-                login(request,user)
-                return HttpResponseRedirect(reverse('dashboard'))
-            else:
-                return HttpResponse("Account not Active")
-        else:
-            print("Someone tried to login and failed")
-            print("Username:{} and password {}".format(username,password))
-            return HttpResponse("Invalid login dailes supplied!")
+# def user_login(request):
+#     if request == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(username=username,password=password)
+#         if user:
+#             if user.is_active:
+#                 login(request,user)
+#                 return HttpResponseRedirect(reverse('dashboard'))
+#             else:
+#                 return HttpResponse("Account not Active")
+#         else:
+#             print("Someone tried to login and failed")
+#             print("Username:{} and password {}".format(username,password))
+#             return HttpResponse("Invalid login dailes supplied!")
 
-    else:
-        return render(request, 'dashboard/page-login.html', {'login_user': login_user})
+#     else:
+#         return render(request, 'dashboard/page-login.html', {'login_user': login_user})

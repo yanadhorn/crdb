@@ -40,10 +40,6 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'persons.apps.PersonsConfig',
     'accounts.apps.AccountsConfig',
-    # 'accounts.apps.AccountConfig',
-    # # 'persons.apps.PerSonConfig',
-    # 'rest_framework',
-    # 'updates',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +152,7 @@ MEDIA_URL = '/media/'
 
 # Login Redirect URL
 LOGIN_URL = 'dashboard/login'
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'dashboard'
 
 # Rest Framework
