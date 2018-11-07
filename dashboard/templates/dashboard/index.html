@@ -101,7 +101,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
+                            <li><i class="menu-icon fa fa-line-chart"></i><a href="{% url 'chartjs' %}">Chart JS</a></li>
                             <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
                             <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
                         </ul>
@@ -273,7 +273,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">Dashboard</li>
+                            <li class="active">ระบบฐานข้อมูล</li>
                         </ol>
                     </div>
                 </div>
@@ -281,6 +281,18 @@
         </div>
 
         <div class="content mt-3">
+            <!-- google map api -->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>แผนที่ข้อมูลชุมชนทั่วประเทศ</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="map-2" class="map"></div>
+                    </div>
+                </div>
+                <!-- /# card -->
+            </div>
 
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -699,6 +711,10 @@
             } );
         } )( jQuery );
     </script>
-
+    <!-- Gmaps -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkmkBONeJs5cmxx-mX3pQ-RoyCdsksQo8"></script>
+    <script src="{% static 'assets/js/lib/gmap/gmaps.js' %}"></script>
+    <script src="{% static 'assets/js/lib/gmap/gmap.init.js' %}"></script>
 </body>
 </html>

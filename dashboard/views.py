@@ -16,6 +16,10 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('dashboard'))
 
+@login_required
+def chartjs(request):
+    return render(request, 'dashboard/charts_chartjs.html', {'chartjs':chartjs})
+    
 # def user_login(request):
 #     if request == 'POST':
 #         username = request.POST.get('username')

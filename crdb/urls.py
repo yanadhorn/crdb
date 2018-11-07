@@ -26,6 +26,7 @@ urlpatterns = [
     path('', dashboard.views.dashboard, name='dashboard'),
     path('admin/', admin.site.urls),
     path('dashboard/', include('django.contrib.auth.urls')),
+    path('dashboard/', include('dashboard.urls')),
     # path('', dashboard.views.dashboard, name='user_login'),
     # path('^', include(router.urls)),
 ]
