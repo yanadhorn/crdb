@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'persons.apps.PersonsConfig',
     'accounts.apps.AccountsConfig',
+    'blog.apps.BlogConfig',
+    'activities.apps.ActivitiesConfig'
 ]
 
 MIDDLEWARE = [

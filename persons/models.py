@@ -25,21 +25,26 @@ class education(models.Model):
     edu_name = models.CharField(max_length=255)
     edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
 
-class religion(models.Model):
+class religions(models.Model):
     religion = models.CharField(max_length=255)
     sect = models.CharField(max_length=255)
 
-class Person(models.Model):
+class person(models.Model):
     sex = (
         ('male', 'ผู้ชาย'),
         ('female', 'ผู้หญิง'),
+    )
+    title_name = (
+        ('mr', 'นาย'),
+        ('mrs', 'นาง'),
+        ('ms', 'นางสาว')
     )
     person_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
     sex_status = models.CharField(max_length=255, choices=sex)
-    religion = models.ForeignKey(religion,on_delete=models.CASCADE)
+    religion = models.ForeignKey(religions,on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
     email = models.CharField(max_length=255)
