@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\EGAT\\Anaconda3\\envs\\crdb-project\\python.exe"
+    "python.pythonPath": "D:\\Users\\Gamella\\Anaconda3\\envs\\crdb-project\\python.exe",
+    "python.linting.pylintEnabled": true
 }

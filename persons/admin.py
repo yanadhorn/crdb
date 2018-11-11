@@ -1,11 +1,34 @@
 from django.contrib import admin
 
-# Register your models here.
+# Register your models here. we can use appname.models also
 from .models import person,education,education_grade,organization,org_categories,religions
 
+class ReligionAdmin(admin.ModelAdmin):
+    list_display = ('religion' , 'sect')
+    search_fields = ('religion', 'sect')
+
+# class BookAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'publisher', 'publication_date')
+#     list_filter = ('publication_date',)
+
+class OrgCatAdmin(admin.ModelAdmin):
+    list_display = ('org_categories',)
+
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('edu_id', 'edu_name','edu_grade' )
+    search_fields = ('edu_name','edu_grade')
+
+class OrgAdmin(admin.ModelAdmin):
+    list_display = ('organization_name', 'org_address','org_categories','org_tel','org_field','org_mail','org_fund')
+    search_fields = ('organization_name', 'org_address','org_categories','org_tel','org_field','org_mail','org_fund')
+
+class EduGradeAdmin(admin.ModelAdmin):
+    list_display = ('edu_grade', 'edu_degree','edu_major' )
+    search_fields = ('edu_grade', 'edu_degree','edu_major')
+
 admin.site.register(person)
-admin.site.register(education)
-admin.site.register(education_grade)
-admin.site.register(organization)
-admin.site.register(org_categories)
-admin.site.register(religions)
+admin.site.register(education,EducationAdmin)
+admin.site.register(education_grade,EduGradeAdmin)
+admin.site.register(organization,OrgAdmin)
+admin.site.register(org_categories, OrgCatAdmin)
+admin.site.register(religions, ReligionAdmin)
