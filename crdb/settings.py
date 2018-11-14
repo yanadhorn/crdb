@@ -158,3 +158,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'dashboard'
 
 # Rest Framework
+# session control
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_COOKIE_AGE = 3000
