@@ -11,16 +11,16 @@ class organization(models.Model):
     organization_name = models.CharField(max_length=255)
     org_address = models.CharField(max_length=255)
     org_categories = models.ForeignKey(org_categories,on_delete=models.CASCADE)
-    org_tel = models.CharField(max_length=255)
-    org_field = models.CharField(max_length=255)
-    org_mail = models.EmailField(max_length=255)
-    org_fund = models.CharField(max_length=255)
+    org_tel = models.CharField(null=True,max_length=255)
+    org_field = models.CharField(null=True,max_length=255)
+    org_mail = models.EmailField(null=True,max_length=255)
+    org_fund = models.CharField(null=True,max_length=255)
 
 #ระดับชั้นการศึกษา ปริญญา สาขา เอก
 class education_grade(models.Model):
-    edu_grade = models.CharField(max_length=200)
+    edu_grade = models.CharField(null=True,max_length=200)
     edu_degree = models.CharField(default='NULL' ,max_length=200)
-    edu_major = models.CharField(max_length=200)
+    edu_major = models.CharField(null=True,max_length=200)
 
     def __str__(self):
         return self.edu_grade
@@ -37,10 +37,16 @@ class education(models.Model):
 #ศาสนา และนิกาย
 class religions(models.Model):
     religion = models.CharField(max_length=255)
-    sect = models.CharField(max_length=255)
+    sect = models.CharField(null=True,max_length=255)
 
     def __str__(self):
         return u'%s: %s'% (self.religion,self.sect)
+
+class addresss(models.Model):
+    addre = models.CharField(max_length=255)
+    district = models.CharField(max_length=255)
+    amphur = models.CharField(max_length=255)
+    province = models.CharField(max_length=255)
 
 class person(models.Model):
     sex = (
