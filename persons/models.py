@@ -73,7 +73,8 @@ class person(models.Model):
     latCo = models.CharField(max_length=255)
     longCo = models.CharField(max_length=255)
     relation = models.CharField(max_length=255)
-    Srelation = models.CharField(max_length=255)
+    friends = models.ManyToManyField("self")
+    # Srelation = models.CharField(max_length=255)
     #ประวัติการศึกษาควรทำอย่างไร
     edu_name = models.ForeignKey(education,on_delete=models.CASCADE)
     # edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
@@ -88,3 +89,23 @@ class person(models.Model):
     remark = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
+    
+    def __str__(self):
+        return self.name
+
+# class relations(models.Model):
+#     relations_type = (
+#         ('father', 'พ่อ'),
+#         ('mother', 'แม่'),
+#         ('son', 'ลูกชาย'),
+#         ('daugther','ลูกสาว'),
+#         ('aunt','ป้า'),
+#         ('olderbrother','พี่ชาย'),
+#         ('littlebrother','น้องชาย'),
+#         ('oldersister','พี่สาว'),
+#         ('littlesister','น้องสาว'),
+#     )
+#     relation = models.CharField(max_length=100, choices=relations_type)
+#     person1 = models.ForeignKey(person,on_delete=models.DO_NOTHING)

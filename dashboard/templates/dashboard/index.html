@@ -524,17 +524,20 @@
                                     <td scope="row" class="serial">1.</td>
                                     <td class="avatar">
                                         <div class="round-img">
-                                            <a href="#"><img class="rounded-circle" src="{% static 'images/avatar/1.jpg' %}" alt=""></a>
+                                            <!-- <a href="#"><img class="rounded-circle" src="{% static 'images/avatar/1.jpg' %}" alt=""></a> -->
+                                            <a href="#"><img class="rounded-circle" src="{{ persons.image.url }}" alt=""></a>
                                         </div>
                                     </td>
+                                {% for person in persons.all %}
                                     <td> #5469 </td>
-                                    <td>  <span class="name">Louis Stanley</span> </td>
+                                    <td>  <span class="name">{{ persons.name }}</span> </td>
                                     <td> <span class="product">iMax</span> </td>
                                     <td><span class="count">231</span></td>
                                     <td> <span class="product">iMax</span> </td>
                                     <td>
                                         <span class="badge badge-success">Complete</span>
                                     </td>
+                                {% endfor %}
                                 </tr>
                                 <tr>
                                     <td scope="row" class="serial">2.</td>

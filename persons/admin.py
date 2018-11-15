@@ -26,7 +26,12 @@ class EduGradeAdmin(admin.ModelAdmin):
     list_display = ('edu_grade', 'edu_degree','edu_major' )
     search_fields = ('edu_grade', 'edu_degree','edu_major')
 
-admin.site.register(person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('name','surname','email', 'mobiles')
+    # search_fields = ('name','relation')
+    # autocomplete_fields = ('religion','edu_name')
+
+admin.site.register(person,PersonAdmin)
 admin.site.register(education,EducationAdmin)
 admin.site.register(education_grade,EduGradeAdmin)
 admin.site.register(organization,OrgAdmin)
