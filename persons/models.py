@@ -42,10 +42,10 @@ class religions(models.Model):
     def __str__(self):
         return u'%s: %s'% (self.religion,self.sect)
 
-class addresss(models.Model):
-    addre = models.CharField(max_length=255)
-    district = models.CharField(max_length=255)
-    amphur = models.CharField(max_length=255)
+class address(models.Model):
+    addre = models.CharField(null=True,max_length=255)
+    district = models.CharField(null=True,max_length=255)
+    amphur = models.CharField(null=True,max_length=255)
     province = models.CharField(max_length=255)
 
 class person(models.Model):
@@ -69,30 +69,30 @@ class person(models.Model):
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
     sex_status = models.CharField(max_length=255, choices=sex)
-    religion = models.ForeignKey(religions,on_delete=models.CASCADE)
+    religion = models.ForeignKey(religions,null=True,on_delete=models.CASCADE)
     status = models.CharField(max_length=100, choices=status_list)
     image = models.ImageField(upload_to='images/')
-    email = models.CharField(max_length=255)
-    mobiles = models.CharField(max_length=20)  #ควรหาตัว validate เบอร์โทรใหม่และการสร้างใหม่เพราะ 1 คนสามารถมีได้หลายเบอร์
-    dob = models.DateField()
-    address = models.CharField(max_length=255)
-    latCo = models.CharField(max_length=255)
-    longCo = models.CharField(max_length=255)
-    relation = models.CharField(max_length=255)
+    email = models.CharField(null=True,max_length=255)
+    mobiles = models.CharField(null=True,max_length=20)  #ควรหาตัว validate เบอร์โทรใหม่และการสร้างใหม่เพราะ 1 คนสามารถมีได้หลายเบอร์
+    dob = models.DateField(null=True)
+    addre = models.ForeignKey(address,null=True,on_delete=models.CASCADE)
+    latCo = models.CharField(null=True,max_length=255)
+    longCo = models.CharField(null=True,max_length=255)
+    relation = models.CharField(null=True,max_length=255)
     friends = models.ManyToManyField("self")
     # Srelation = models.CharField(max_length=255)
     #ประวัติการศึกษาควรทำอย่างไร
-    edu_name = models.ForeignKey(education,on_delete=models.CASCADE)
+    edu_name = models.ForeignKey(education,null=True,on_delete=models.CASCADE)
     # edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     # edu_degree = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     # edu_major = models.ForeignKey(education_grade,on_delete=models.CASCADE)
-    job = models.CharField(max_length=255)
-    organization_name = models.ForeignKey(organization,on_delete=models.CASCADE)
-    job_description = models.TextField()
-    facebook = models.CharField(max_length=255)
-    twitter = models.CharField(max_length=255)
-    instagram = models.CharField(max_length=255)
-    remark = models.TextField()
+    job = models.CharField(null=True,max_length=255)
+    organization_name = models.ForeignKey(organization,null=True,on_delete=models.CASCADE)
+    job_description = models.TextField(null=True)
+    facebook = models.CharField(null=True,max_length=255)
+    twitter = models.CharField(null=True,max_length=255)
+    instagram = models.CharField(null=True,max_length=255)
+    remark = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
