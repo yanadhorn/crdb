@@ -16,6 +16,9 @@ class organization(models.Model):
     org_mail = models.EmailField(null=True,max_length=255)
     org_fund = models.CharField(null=True,max_length=255)
 
+    def __str__(self):
+        return self.organization_name
+
 #ระดับชั้นการศึกษา ปริญญา สาขา เอก
 class education_grade(models.Model):
     edu_grade = models.CharField(null=True,max_length=200)
@@ -47,6 +50,9 @@ class address(models.Model):
     district = models.CharField(null=True,max_length=255)
     amphur = models.CharField(null=True,max_length=255)
     province = models.CharField(max_length=255)
+
+    def __str__(self):
+        return u'%s: %s %s %s'% (self.addre,self.district,self.amphur,self.province)
 
 class person(models.Model):
     sex = (

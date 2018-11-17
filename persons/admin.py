@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here. we can use appname.models also
-from .models import person,education,education_grade,organization,org_categories,religions
+from .models import person,education,education_grade,organization,org_categories,religions,address
 
 class ReligionAdmin(admin.ModelAdmin):
     list_display = ('religion' , 'sect')
@@ -31,9 +31,13 @@ class PersonAdmin(admin.ModelAdmin):
     # search_fields = ('name','relation')
     # autocomplete_fields = ('religion','edu_name')
 
+class AddrAdmin(admin.ModelAdmin):
+    list_display = ('addre','district','amphur','province')
+
 admin.site.register(person,PersonAdmin)
 admin.site.register(education,EducationAdmin)
 admin.site.register(education_grade,EduGradeAdmin)
 admin.site.register(organization,OrgAdmin)
 admin.site.register(org_categories, OrgCatAdmin)
 admin.site.register(religions, ReligionAdmin)
+admin.site.register(address,AddrAdmin)
