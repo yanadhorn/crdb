@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'persons.apps.PersonsConfig',
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
-    'activities.apps.ActivitiesConfig'
+    'activities.apps.ActivitiesConfig',
 ]
 
 MIDDLEWARE = [

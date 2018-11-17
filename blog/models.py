@@ -1,5 +1,7 @@
 from django.db import models
-
+from persons.models import person
+#import user django
+from django.conf import settings
 # Create your models here.
 
 # title
@@ -12,6 +14,8 @@ class Blog(models.Model):
     pub_date = models.DateTimeField()
     body = models.TextField()
     image = models.ImageField(upload_to='images/')
+    person_related = models.ManyToManyField(person)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
     objects = models.Manager()
 

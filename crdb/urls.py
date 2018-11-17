@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('django.contrib.auth.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('blog/', include('django.contrib.auth.urls')),
+    path('blog/', include('blog.urls')),
     # path('', dashboard.views.dashboard, name='user_login'),
     # path('^', include(router.urls)),
 ]
