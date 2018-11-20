@@ -5,12 +5,16 @@ from django.db import models
 class org_categories(models.Model):
     org_categories = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.org_categories
+
 #รายชื่อองค์กร
 class organization(models.Model):
     # org_id = models.AutoField(primary_key=True)
     organization_name = models.CharField(max_length=255)
     org_address = models.CharField(max_length=255)
     org_categories = models.ForeignKey(org_categories,on_delete=models.CASCADE)
+    org_website = models.URLField(blank=True,null=True)
     org_tel = models.CharField(blank=True,null=True,max_length=255)
     org_field = models.CharField(blank=True,null=True,max_length=255)
     org_mail = models.EmailField(blank=True,null=True,max_length=255)
@@ -74,6 +78,7 @@ class person(models.Model):
     title = models.CharField(max_length=100, choices=title_name)
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
+    nickname = models.CharField(max_length=100)
     sex_status = models.CharField(max_length=255, choices=sex)
     religion = models.ForeignKey(religions,blank=True,null=True,on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=status_list)
@@ -95,9 +100,9 @@ class person(models.Model):
     job = models.CharField(blank=True,null=True,max_length=255)
     organization_name = models.ForeignKey(organization,blank=True,null=True,on_delete=models.CASCADE)
     job_description = models.TextField(blank=True,null=True)
-    facebook = models.CharField(blank=True,null=True,max_length=255)
-    twitter = models.CharField(blank=True,null=True,max_length=255)
-    instagram = models.CharField(blank=True,null=True,max_length=255)
+    facebook = models.URLField(blank=True,null=True,max_length=255)
+    twitter = models.URLField(blank=True,null=True,max_length=255)
+    instagram = models.URLField(blank=True,null=True,max_length=255)
     remark = models.TextField(blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -106,6 +111,11 @@ class person(models.Model):
     
     def __str__(self):
         return self.name
+
+# class contact(models.Model):
+#     person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+#     phonenumber
+
 
 # class relations(models.Model):
 #     relations_type = (
