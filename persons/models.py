@@ -78,12 +78,13 @@ class person(models.Model):
     title = models.CharField(max_length=100, choices=title_name)
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
-    nickname = models.CharField(max_length=100)
+    nickname = models.CharField(blank=True,null=True,max_length=100)
     sex_status = models.CharField(max_length=255, choices=sex)
     religion = models.ForeignKey(religions,blank=True,null=True,on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=status_list)
     image = models.ImageField(blank=True,upload_to='images/')
     email = models.CharField(blank=True,null=True,max_length=255)
+    # personContact = models.ForeignKey(contact,blank=True,null=True,max_length=20,on_delete=models.CASCADE)
     mobiles = models.CharField(blank=True,null=True,max_length=20)  #ควรหาตัว validate เบอร์โทรใหม่และการสร้างใหม่เพราะ 1 คนสามารถมีได้หลายเบอร์
     dob = models.DateField(blank=True,null=True)
     addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)
@@ -112,10 +113,16 @@ class person(models.Model):
     def __str__(self):
         return self.name
 
-# class contact(models.Model):
-#     person_id = models.ForeignKey(person,on_delete=models.CASCADE)
-#     phonenumber
-
+class contact(models.Model):
+    phoneType = (
+        ('Home','บ้าน'),
+        ('Work','ที่ทำงาน'),
+        ('Mobile','มือถือ'),
+        ('Mobile2','มือถือ2'),
+    )
+    personContact = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
+    contactType = models.CharField(max_length=100,choices=phoneType)
+    phonenumber = models.IntegerField()
 
 # class relations(models.Model):
 #     relations_type = (
