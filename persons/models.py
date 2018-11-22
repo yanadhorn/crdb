@@ -9,19 +9,7 @@ class org_categories(models.Model):
         return self.org_categories
 
 #รายชื่อองค์กร
-class organization(models.Model):
-    # org_id = models.AutoField(primary_key=True)
-    organization_name = models.CharField(max_length=255)
-    org_address = models.CharField(max_length=255)
-    org_categories = models.ForeignKey(org_categories,on_delete=models.CASCADE)
-    org_website = models.URLField(blank=True,null=True)
-    org_tel = models.CharField(blank=True,null=True,max_length=255)
-    org_field = models.CharField(blank=True,null=True,max_length=255)
-    org_mail = models.EmailField(blank=True,null=True,max_length=255)
-    org_fund = models.CharField(blank=True,null=True,max_length=255)
 
-    def __str__(self):
-        return self.organization_name
 
 #ระดับชั้นการศึกษา ปริญญา สาขา เอก
 class education_grade(models.Model):
@@ -99,7 +87,7 @@ class person(models.Model):
     # edu_degree = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     # edu_major = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     job = models.CharField(blank=True,null=True,max_length=255)
-    organization_name = models.ForeignKey(organization,blank=True,null=True,on_delete=models.CASCADE)
+    # organization_name = models.ForeignKey(organization,blank=True,null=True,on_delete=models.CASCADE)
     job_description = models.TextField(blank=True,null=True)
     facebook = models.URLField(blank=True,null=True,max_length=255)
     twitter = models.URLField(blank=True,null=True,max_length=255)
@@ -123,6 +111,20 @@ class contact(models.Model):
     personContact = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     contactType = models.CharField(max_length=100,choices=phoneType)
     phonenumber = models.IntegerField()
+
+class organization(models.Model):
+    # org_id = models.AutoField(primary_key=True)
+    organization_name = models.ForeignKey(person,on_delete=models.CASCADE,max_length=255)
+    org_address = models.CharField(max_length=255)
+    org_categories = models.ForeignKey(org_categories,on_delete=models.CASCADE)
+    org_website = models.URLField(blank=True,null=True)
+    org_tel = models.CharField(blank=True,null=True,max_length=255)
+    org_field = models.CharField(blank=True,null=True,max_length=255)
+    org_mail = models.EmailField(blank=True,null=True,max_length=255)
+    org_fund = models.CharField(blank=True,null=True,max_length=255)
+
+    def __str__(self):
+        return self.organization_name
 
 # class relations(models.Model):
 #     relations_type = (
