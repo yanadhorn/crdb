@@ -8,26 +8,14 @@ class org_categories(models.Model):
     def __str__(self):
         return self.org_categories
 
-#รายชื่อองค์กร
-
-
 #ระดับชั้นการศึกษา ปริญญา สาขา เอก
 class education_grade(models.Model):
     edu_grade = models.CharField(null=True,max_length=200)
-    edu_degree = models.CharField(blank=True,default='NULL' ,max_length=200)
+    edu_degree = models.CharField(blank=True,null=True,max_length=200)
     edu_major = models.CharField(blank=True,null=True,max_length=200)
 
     def __str__(self):
         return self.edu_grade
-
-#ชื่อมหาลัย ระดับชั้นการศึกษา
-class education(models.Model):
-    edu_id = models.AutoField(primary_key=True)
-    edu_name = models.CharField(max_length=255)
-    edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.edu_name
 
 #ศาสนา และนิกาย
 class religions(models.Model):
@@ -55,6 +43,10 @@ class person(models.Model):
         ('mr', 'นาย'),
         ('mrs', 'นาง'),
         ('ms', 'นางสาว'),
+        ('dr','ดร.'),
+        ('Asst','ผศ.'),
+        ('Asst Dr','ผศ. ดร.'),
+        ('ML','มล.')
     )
     status_list = (
         ('single','โสด'),
@@ -79,10 +71,11 @@ class person(models.Model):
     latCo = models.CharField(blank=True,null=True,max_length=255)
     longCo = models.CharField(blank=True,null=True,max_length=255)
     relation = models.CharField(blank=True,null=True,max_length=255)
-    friends = models.ManyToManyField("self",blank=True)
+    friends = models.ManyToManyField("self",blank=True,null=True)
     # Srelation = models.CharField(max_length=255)
     #ประวัติการศึกษาควรทำอย่างไร
-    edu_name = models.ForeignKey(education,blank=True,null=True,on_delete=models.CASCADE)
+    # edu_name = models.CharField(max_length=200,blank=True,null=True)
+    # edu_name = models.ForeignKey(education,blank=True,null=True,on_delete=models.CASCADE)
     # edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     # edu_degree = models.ForeignKey(education_grade,on_delete=models.CASCADE)
     # edu_major = models.ForeignKey(education_grade,on_delete=models.CASCADE)
@@ -125,6 +118,15 @@ class organization(models.Model):
 
     def __str__(self):
         return self.organization_name
+
+#ชื่อมหาลัย ระดับชั้นการศึกษา
+class education(models.Model):
+    # edu_id = models.AutoField(primary_key=True)
+    edu_name = models.ForeignKey(person,on_delete=models.DO_NOTHING)
+    edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.edu_name
 
 # class relations(models.Model):
 #     relations_type = (

@@ -19,8 +19,13 @@ class OrgAdmin(admin.ModelAdmin):
     list_display = ('organization_name', 'org_address','org_categories','org_tel','org_field','org_mail','org_fund')
     search_fields = ('organization_name', 'org_address','org_categories','org_tel','org_field','org_mail','org_fund')
 
+class EduInline(admin.TabularInline):
+    model = education
+    extra = 1
+    fk_name = 'edu_name'
+
 class EducationAdmin(admin.ModelAdmin):
-    list_display = ('edu_id', 'edu_name','edu_grade' )
+    list_display = ('edu_name','edu_grade' )
     search_fields = ('edu_name','edu_grade')
 
 class EduGradeAdmin(admin.ModelAdmin):
@@ -36,7 +41,7 @@ class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email', 'mobiles')
     # search_fields = ('name','relation')
     # autocomplete_fields = ('religion','edu_name')
-    inlines = [contactInline,OrgInline]
+    inlines = [contactInline,EduInline,OrgInline,]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
