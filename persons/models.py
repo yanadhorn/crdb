@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import URLValidator
 
 # Create your models here.
 # ประเภทขององค์กร รัฐ เอกชน สังคม
@@ -63,28 +64,15 @@ class person(models.Model):
     religion = models.ForeignKey(religions,blank=True,null=True,on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=status_list)
     image = models.ImageField(blank=True,upload_to='images/')
-    email = models.CharField(blank=True,null=True,max_length=255)
-    # personContact = models.ForeignKey(contact,blank=True,null=True,max_length=20,on_delete=models.CASCADE)
-    mobiles = models.CharField(blank=True,null=True,max_length=20)  #ควรหาตัว validate เบอร์โทรใหม่และการสร้างใหม่เพราะ 1 คนสามารถมีได้หลายเบอร์
+    email = models.EmailField(blank=True,null=True,max_length=255)
     dob = models.DateField(blank=True,null=True)
     addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)
     latCo = models.CharField(blank=True,null=True,max_length=255)
     longCo = models.CharField(blank=True,null=True,max_length=255)
     relation = models.CharField(blank=True,null=True,max_length=255)
-    friends = models.ManyToManyField("self",blank=True,null=True)
-    # Srelation = models.CharField(max_length=255)
-    #ประวัติการศึกษาควรทำอย่างไร
-    # edu_name = models.CharField(max_length=200,blank=True,null=True)
-    # edu_name = models.ForeignKey(education,blank=True,null=True,on_delete=models.CASCADE)
-    # edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
-    # edu_degree = models.ForeignKey(education_grade,on_delete=models.CASCADE)
-    # edu_major = models.ForeignKey(education_grade,on_delete=models.CASCADE)
+    friends = models.ManyToManyField("self",blank=True)
     job = models.CharField(blank=True,null=True,max_length=255)
-    # organization_name = models.ForeignKey(organization,blank=True,null=True,on_delete=models.CASCADE)
     job_description = models.TextField(blank=True,null=True)
-    facebook = models.URLField(blank=True,null=True,max_length=255)
-    twitter = models.URLField(blank=True,null=True,max_length=255)
-    instagram = models.URLField(blank=True,null=True,max_length=255)
     remark = models.TextField(blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -121,12 +109,31 @@ class organization(models.Model):
 
 #ชื่อมหาลัย ระดับชั้นการศึกษา
 class education(models.Model):
-    # edu_id = models.AutoField(primary_key=True)
     edu_name = models.ForeignKey(person,on_delete=models.DO_NOTHING)
     edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.edu_name
+
+#บัญชี social media
+class facebookAcc(models.Model):
+    facebook = models.ForeignKey(person,validators=URLValidator,on_delete=models.CASCADE,blank=True,null=True,max_length=255)
+
+    def __str__(self):
+        return self.facebook
+
+class twitterAcc(models.Model):
+    twitter = models.ForeignKey(person,validators=URLValidator,on_delete=models.CASCADE,blank=True,null=True,max_length=255)
+    instagram = models.ForeignKey(person,validators=URLValidator,on_delete=models.CASCADE,blank=True,null=True,max_length=255)
+
+    def __str__(self):
+        return self.twitter
+
+class instagramAcc(models.Model):
+    instagram = models.ForeignKey(person,validators=URLValidator,on_delete=models.CASCADE,blank=True,null=True,max_length=255)
+
+    def __str__(self):
+        return self.instagram
 
 # class relations(models.Model):
 #     relations_type = (

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here. we can use appname.models also
-from .models import person,education,education_grade,organization,org_categories,religions,address,contact
+from .models import person,education,education_grade,organization,org_categories,religions,address,contact,facebookAcc,twitterAcc,instagramAcc
 
 class ReligionAdmin(admin.ModelAdmin):
     list_display = ('religion' , 'sect')
@@ -37,11 +37,26 @@ class contactInline(admin.TabularInline):
     extra = 2
     fk_name = 'personContact'
 
+class facebookAccInline(admin.TabularInline):
+    model = facebookAcc
+    extra = 1
+    fk_name = 'facebook'
+
+class twitterAccInline(admin.TabularInline):
+    model = twitterAcc
+    extra = 1
+    fk_name = 'twitter'
+
+class instagramAccInline(admin.TabularInline):
+    model = instagramAcc
+    extra = 1
+    fk_name = 'insagram'
+
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('name','surname','email', 'mobiles')
+    list_display = ('name','surname','email')
     # search_fields = ('name','relation')
     # autocomplete_fields = ('religion','edu_name')
-    inlines = [contactInline,EduInline,OrgInline,]
+    inlines = [contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
