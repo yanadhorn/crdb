@@ -50,7 +50,7 @@ class twitterAccInline(admin.TabularInline):
 class instagramAccInline(admin.TabularInline):
     model = instagramAcc
     extra = 1
-    fk_name = 'insagram'
+    fk_name = 'instagram'
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email')
