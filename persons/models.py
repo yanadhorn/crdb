@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import URLValidator
 
 # Create your models here.
 # ประเภทขององค์กร รัฐ เอกชน สังคม
@@ -40,14 +39,7 @@ class person(models.Model):
         ('male', 'ผู้ชาย'),
         ('female', 'ผู้หญิง'),
     )
-    title_name = (
-        # ('mr', 'นาย'),
-        # ('mrs', 'นาง'),
-        # ('ms', 'นางสาว'),
-        # ('dr','ดร.'),
-        # ('Asst','ผศ.'),
-        # ('Asst Dr','ผศ. ดร.'),
-        # ('ML','มล.')            
+    title_name = (   
         ('นาย','นาย'),
         ('นาง','นาง'),
         ('น.ส.','นางสาว'),
@@ -241,8 +233,6 @@ class person(models.Model):
     email = models.EmailField(blank=True,null=True,max_length=255)
     dob = models.DateField(blank=True,null=True)
     addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)
-    latCo = models.CharField(blank=True,null=True,max_length=255)
-    longCo = models.CharField(blank=True,null=True,max_length=255)
     relation = models.CharField(blank=True,null=True,max_length=255)
     friends = models.ManyToManyField("self",blank=True)
     job = models.CharField(blank=True,null=True,max_length=255)
@@ -255,6 +245,10 @@ class person(models.Model):
     
     def __str__(self):
         return self.name
+
+class personCoor(models.Model):
+    latitude = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
+    longtitude = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
 
 class contact(models.Model):
     phoneType = (
