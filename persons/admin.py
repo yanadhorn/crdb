@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here. we can use appname.models also
-from .models import person,education,education_grade,organization,org_categories,religions,address,contact,facebookAcc,twitterAcc,instagramAcc
+from .models import title_name,person,jobs,education,education_grade,organization,org_categories,religions,address,personCoor,contact,facebookAcc,twitterAcc,instagramAcc
 
 class ReligionAdmin(admin.ModelAdmin):
     list_display = ('religion' , 'sect')
@@ -65,16 +65,32 @@ class instagramAccInline(admin.TabularInline):
     extra = 1
     # fk_name = 'instagram'
 
+class titleAdmin(admin.ModelAdmin):
+    list_display = ('title_short','title_full')
+    search_fields = ('title_short','title_full')
+    # autocomplete_fields = ('title_short',)
+
+class AddrInlineAdmin(admin.TabularInline):
+    model = address
+
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email')
     search_fields = ('name','nickname')
-    # autocomplete_fields = ('title')
-    autocomplete_fields = ('religion',)
+    autocomplete_fields = ('title_short','religion')
+    # inlines = [AddrInlineAdmin]
     inlines = [contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
 
+# class profilesAdmin(admin.ModelAdmin):
+#     list_display = ('name','surname','email')
+#     search_fields = ('name','nickname')
+#     autocomplete_fields = ('title_short','religion')
+#     inlines = [contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
+
+# admin.site.register(profiles,profilesAdmin)
+admin.site.register(title_name,titleAdmin)
 admin.site.register(person,PersonAdmin)
 admin.site.register(contact,contactAdmin)
 admin.site.register(education,EducationAdmin)
