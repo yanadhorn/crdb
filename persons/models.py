@@ -247,8 +247,8 @@ class person(models.Model):
         return self.name
 
 class personCoor(models.Model):
-    latitude = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
-    longtitude = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
+    latitude = models.ForeignKey(person,related_name='latitude_person',blank=True,null=True,on_delete=models.CASCADE)
+    longtitude = models.ForeignKey(person,related_name='longtitude_person',blank=True,null=True,on_delete=models.CASCADE)
 
 class contact(models.Model):
     phoneType = (
