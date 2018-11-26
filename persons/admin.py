@@ -22,7 +22,8 @@ class OrgAdmin(admin.ModelAdmin):
 class EduInline(admin.TabularInline):
     model = education
     extra = 1
-    fk_name = 'edu_name'
+    fields = ('edu_name','edu_grade')
+    # fk_name = 'edu_name'
 
 class EducationAdmin(admin.ModelAdmin):
     list_display = ('edu_name','edu_grade' )
@@ -32,39 +33,56 @@ class EduGradeAdmin(admin.ModelAdmin):
     list_display = ('edu_grade', 'edu_degree','edu_major' )
     search_fields = ('edu_grade', 'edu_degree','edu_major')
 
+class contactAdmin(admin.ModelAdmin):
+    list_display = ('contactType', 'phonenumber')
+
 class contactInline(admin.TabularInline):
     model = contact
-    extra = 2
+    extra = 1
     fk_name = 'personContact'
+
+class facebookAccAdmin(admin.ModelAdmin):
+    fields = ('facebook',)
 
 class facebookAccInline(admin.TabularInline):
     model = facebookAcc
     extra = 1
-    fk_name = 'facebook'
+    # fk_name = 'facebook'
+
+class twitterAccAdmin(admin.ModelAdmin):
+    list_display = ('twitter',)
 
 class twitterAccInline(admin.TabularInline):
     model = twitterAcc
     extra = 1
-    fk_name = 'twitter'
+    # fk_name = 'twitter'
+
+class instagramAccAdmin(admin.ModelAdmin):
+    display = ('instagram')
 
 class instagramAccInline(admin.TabularInline):
     model = instagramAcc
     extra = 1
-    fk_name = 'instagram'
+    # fk_name = 'instagram'
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email')
-    # search_fields = ('name','relation')
-    # autocomplete_fields = ('religion','edu_name')
+    search_fields = ('name','nickname')
+    # autocomplete_fields = ('title')
+    autocomplete_fields = ('religion',)
     inlines = [contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
 
 admin.site.register(person,PersonAdmin)
+admin.site.register(contact,contactAdmin)
 admin.site.register(education,EducationAdmin)
 admin.site.register(education_grade,EduGradeAdmin)
 admin.site.register(organization,OrgAdmin)
 admin.site.register(org_categories, OrgCatAdmin)
 admin.site.register(religions, ReligionAdmin)
-admin.site.register(address,AddrAdmin)
+admin.site.register(address, AddrAdmin)
+admin.site.register(facebookAcc, facebookAccAdmin)
+admin.site.register(twitterAcc,twitterAccAdmin)
+admin.site.register(instagramAcc,instagramAccAdmin)

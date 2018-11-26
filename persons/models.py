@@ -1,13 +1,6 @@
 from django.db import models
 
 # Create your models here.
-# ประเภทขององค์กร รัฐ เอกชน สังคม
-class org_categories(models.Model):
-    org_categories = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.org_categories
-
 #ระดับชั้นการศึกษา ปริญญา สาขา เอก
 class education_grade(models.Model):
     edu_grade = models.CharField(null=True,max_length=200)
@@ -16,6 +9,14 @@ class education_grade(models.Model):
 
     def __str__(self):
         return self.edu_grade
+
+#ชื่อมหาลัย ระดับชั้นการศึกษา
+class education(models.Model):
+    edu_name = models.CharField(blank=True,null=True,max_length=255)
+    edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.edu_name
 
 #ศาสนา และนิกาย
 class religions(models.Model):
@@ -39,6 +40,8 @@ class person(models.Model):
         ('male', 'ผู้ชาย'),
         ('female', 'ผู้หญิง'),
     )
+
+    #ต้องใช้ autocomplete_fileds โดยจะต้องเพิ่ม table or class ใช้ 
     title_name = (   
         ('นาย','นาย'),
         ('นาง','นาง'),
@@ -232,6 +235,7 @@ class person(models.Model):
     image = models.ImageField(blank=True,upload_to='images/')
     email = models.EmailField(blank=True,null=True,max_length=255)
     dob = models.DateField(blank=True,null=True)
+    edu_name = models.ForeignKey(education,blank=True,null=True,on_delete=models.CASCADE)
     addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)
     relation = models.CharField(blank=True,null=True,max_length=255)
     friends = models.ManyToManyField("self",blank=True)
@@ -261,6 +265,13 @@ class contact(models.Model):
     contactType = models.CharField(max_length=100,choices=phoneType)
     phonenumber = models.IntegerField()
 
+# ประเภทขององค์กร รัฐ เอกชน สังคม
+class org_categories(models.Model):
+    org_categories = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.org_categories
+
 class organization(models.Model):
     # org_id = models.AutoField(primary_key=True)
     organization_name = models.ForeignKey(person,on_delete=models.CASCADE,max_length=255)
@@ -274,14 +285,6 @@ class organization(models.Model):
 
     def __str__(self):
         return self.organization_name
-
-#ชื่อมหาลัย ระดับชั้นการศึกษา
-class education(models.Model):
-    edu_name = models.ForeignKey(person,on_delete=models.DO_NOTHING)
-    edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.edu_name
 
 #บัญชี social media
 class facebookAcc(models.Model):
