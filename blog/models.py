@@ -14,7 +14,7 @@ class Blog(models.Model):
     pub_date = models.DateTimeField()
     body = models.TextField()
     image = models.ImageField(upload_to='images/')
-    person_related = models.ManyToManyField(person)
+    # person_related = models.ManyToManyField(person)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
     objects = models.Manager()

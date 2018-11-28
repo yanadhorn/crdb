@@ -73,7 +73,7 @@ class education_grade(models.Model):
 
 #ชื่อสถาบันการศึกษา ระดับชั้นการศึกษา ป.ตรี โท เอก
 class education(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     edu_name = models.CharField(blank=True,null=True,max_length=255)
     edu_grade = models.ForeignKey(education_grade,on_delete=models.CASCADE)
 
@@ -81,7 +81,7 @@ class education(models.Model):
         return self.edu_name
 
 class address(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     addre = models.CharField(blank=True,null=True,max_length=255)
     district = models.CharField(null=True,max_length=255)
     amphur = models.CharField(null=True,max_length=255)
@@ -91,12 +91,15 @@ class address(models.Model):
         return u'%s: %s %s %s'% (self.addre,self.district,self.amphur,self.province)
 
 class jobs(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     job = models.CharField(blank=True,null=True,max_length=255)
     job_description = models.TextField(blank=True,null=True)
 
+    def __str__(self):
+        return self.job
+
 class personCoor(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     latitude = models.CharField(blank=True,null=True,max_length=255)
     longtitude = models.CharField(blank=True,null=True,max_length=255)
 
@@ -110,6 +113,9 @@ class contact(models.Model):
     personContact = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     contactType = models.CharField(max_length=100,choices=phoneType)
     phonenumber = models.IntegerField()
+
+    def __str__(self):
+        return self.contactType
 
 # ประเภทขององค์กร รัฐ เอกชน สังคม
 class org_categories(models.Model):
@@ -129,11 +135,11 @@ class organization(models.Model):
     org_fund = models.CharField(blank=True,null=True,max_length=255)
 
     def __str__(self):
-        return self.organization_name
+        return self.org_address
 
 #บัญชี social media
 class facebookAcc(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     facebook = models.URLField(blank=True,null=True,max_length=255)
     # facebook = models.ForeignKey(person,on_delete=models.CASCADE,blank=True,null=True)
 
@@ -141,7 +147,7 @@ class facebookAcc(models.Model):
         return self.facebook
 
 class twitterAcc(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     twitter = models.URLField(blank=True,null=True,max_length=255)
     # twitter = models.ForeignKey(person,on_delete=models.CASCADE,blank=True,null=True)
 
@@ -149,7 +155,7 @@ class twitterAcc(models.Model):
         return self.twitter
 
 class instagramAcc(models.Model):
-    person_id = models.ForeignKey(person,on_delete=models.CASCADE)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
     instagram = models.URLField(blank=True,null=True,max_length=255)
     # instagram = models.ForeignKey(person,on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):

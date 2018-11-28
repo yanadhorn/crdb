@@ -72,13 +72,14 @@ class titleAdmin(admin.ModelAdmin):
 
 class AddrInlineAdmin(admin.TabularInline):
     model = address
+    extra = 1
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email')
     search_fields = ('name','nickname')
     autocomplete_fields = ('title_short','religion')
     # inlines = [AddrInlineAdmin]
-    inlines = [contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
+    inlines = [AddrInlineAdmin,contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
