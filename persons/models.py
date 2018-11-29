@@ -60,7 +60,7 @@ class person(models.Model):
     objects = models.Manager()
     
     def __str__(self):
-        return self.name
+        return u'%s: %s '% (self.name,self.surname)
 
 #ระดับชั้นการศึกษา ปริญญา สาขาเช่นคณะวิทยาศาสตร์ สาขาคอมพิวเตอรื
 class education_grade(models.Model):
@@ -69,7 +69,9 @@ class education_grade(models.Model):
     edu_major = models.CharField(blank=True,null=True,max_length=200)
 
     def __str__(self):
-        return self.edu_grade
+        return u'%s: %s %s'% (self.edu_grade,self.edu_degree,self.edu_major)
+    # def __str__(self):
+    #     return self.edu_grade
 
 #ชื่อสถาบันการศึกษา ระดับชั้นการศึกษา ป.ตรี โท เอก
 class education(models.Model):
@@ -96,7 +98,7 @@ class jobs(models.Model):
     job_description = models.TextField(blank=True,null=True)
 
     def __str__(self):
-        return self.job
+        return str(self.job)
 
 class personCoor(models.Model):
     person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
@@ -125,7 +127,8 @@ class org_categories(models.Model):
         return self.org_categories
 
 class organization(models.Model):
-    organization_name = models.ForeignKey(person,on_delete=models.CASCADE,max_length=255)
+    person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
+    organization_name = models.CharField(blank=True,null=True,max_length=255)
     org_address = models.CharField(max_length=255)
     org_categories = models.ForeignKey(org_categories,on_delete=models.CASCADE)
     org_website = models.URLField(blank=True,null=True)

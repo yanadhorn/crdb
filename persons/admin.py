@@ -10,7 +10,7 @@ class ReligionAdmin(admin.ModelAdmin):
 class OrgInline(admin.TabularInline):
     model = organization
     extra = 1
-    fk_name = 'organization_name'
+    # fk_name = 'organization_name'
 
 class OrgCatAdmin(admin.ModelAdmin):
     list_display = ('org_categories',)
@@ -74,12 +74,20 @@ class AddrInlineAdmin(admin.TabularInline):
     model = address
     extra = 1
 
+class jobsInlineAdmin(admin.TabularInline):
+    model = jobs
+    extra = 1
+
+class jobsAdmin(admin.ModelAdmin):
+    list_display = ('job','job_description')
+    search_fields = ('job','job_description')
+
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name','surname','email')
     search_fields = ('name','nickname')
     autocomplete_fields = ('title_short','religion')
     # inlines = [AddrInlineAdmin]
-    inlines = [AddrInlineAdmin,contactInline,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
+    inlines = [AddrInlineAdmin,contactInline,jobsInlineAdmin,EduInline,OrgInline,facebookAccInline,twitterAccInline,instagramAccInline]
 
 class AddrAdmin(admin.ModelAdmin):
     list_display = ('addre','district','amphur','province')
@@ -99,6 +107,7 @@ admin.site.register(education_grade,EduGradeAdmin)
 admin.site.register(organization,OrgAdmin)
 admin.site.register(org_categories, OrgCatAdmin)
 admin.site.register(religions, ReligionAdmin)
+admin.site.register(jobs,jobsAdmin)
 admin.site.register(address, AddrAdmin)
 admin.site.register(facebookAcc, facebookAccAdmin)
 admin.site.register(twitterAcc,twitterAccAdmin)

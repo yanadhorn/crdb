@@ -31,4 +31,4 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     # path('', dashboard.views.dashboard, name='user_login'),
     # path('^', include(router.urls)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
