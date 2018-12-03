@@ -164,20 +164,6 @@ class instagramAcc(models.Model):
     def __str__(self):
         return self.instagram
 
-# class profiles(models.Model):
-#     person_id = models.ForeignKey(person,blank=True,null=True,on_delete=models.CASCADE)
-#     religion = models.ForeignKey(religions,blank=True,null=True,on_delete=models.CASCADE)
-#     addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)
-#     contactType = models.ForeignKey(contact,blank=True,null=True,on_delete=models.CASCADE)
-#     edu_name = models.ForeignKey(education,blank=True,null=True,on_delete=models.CASCADE)
-#     organization_name = models.ForeignKey(organization,blank=True,null=True,on_delete=models.CASCADE)
-#     job = models.ForeignKey(jobs,blank=True,null=True,on_delete=models.CASCADE)
-#     personCoor = models.ForeignKey(personCoor,blank=True,null=True,on_delete=models.CASCADE)
-#     facebook = models.ForeignKey(facebookAcc,blank=True,null=True,on_delete=models.CASCADE)
-#     twitter = models.ForeignKey(twitterAcc,blank=True,null=True,on_delete=models.CASCADE)
-#     instagram = models.ForeignKey(instagramAcc,blank=True,null=True,on_delete=models.CASCADE)
-
-
 # class relations(models.Model):
 #     relations_type = (
 #         ('father', 'พ่อ'),

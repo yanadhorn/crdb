@@ -13,12 +13,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required
 def dashboard(request):
     person_list = person.objects.all()
-    paginator = Paginator(person_list,10)
-    
+    paginator = Paginator(person_list, 5) # Show 25 contacts per page
+
     page = request.GET.get('page')
     personlist = paginator.get_page(page)
-
+        
+    # personlist = paginator.get_page(page)
     return render(request, 'dashboard/index.html', {'dashboard': dashboard,'personlist': personlist})
+    # return render(request, 'dashboard/index.html', {'dashboard': dashboard,'personlist': personlist})
 
 @login_required
 def user_logout(request):
@@ -28,6 +30,15 @@ def user_logout(request):
 @login_required
 def chartjs(request):
     return render(request, 'dashboard/charts_chartjs.html', {'chartjs':chartjs})
+
+@login_required
+def personlisting(request):
+    person_list = person.objects.all()
+    paginator = Paginator(person_list, 5) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    personlist = paginator.get_page(page)
+    return render(request, 'dashboard/index.html', {'personlist': personlist})
     
 # def user_login(request):
 #     if request == 'POST':
