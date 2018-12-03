@@ -40,7 +40,7 @@ class person(models.Model):
     #เชื่อมไปยัง table religion
     religion = models.ForeignKey(religions,blank=True,null=True,on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=status_list)
-    image = models.ImageField(blank=True,upload_to='images/')
+    image = models.ImageField(null=True,blank=True,upload_to='images/')
     email = models.EmailField(blank=True,null=True,max_length=255)
     dob = models.DateField(blank=True,null=True)
     # addre = models.ForeignKey(address,blank=True,null=True,on_delete=models.CASCADE)

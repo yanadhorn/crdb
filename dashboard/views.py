@@ -4,12 +4,21 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from persons.models import person
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from .models import
 # Create your views here.
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard/index.html', {'dashboard': dashboard})
+    person_list = person.objects.all()
+    paginator = Paginator(person_list,10)
+    
+    page = request.GET.get('page')
+    personlist = paginator.get_page(page)
+
+    return render(request, 'dashboard/index.html', {'dashboard': dashboard,'personlist': personlist})
 
 @login_required
 def user_logout(request):

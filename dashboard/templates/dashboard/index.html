@@ -525,24 +525,45 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                {% for personDash in personlist.all %}
                                     <td scope="row" class="serial">1.</td>
                                     <td class="avatar">
                                         <div class="round-img">
                                             <!-- <a href="#"><img class="rounded-circle" src="{% static 'images/avatar/1.jpg' %}" alt=""></a> -->
-                                            <a href="#"><img class="rounded-circle" src="{{ persons.image.url }}" alt=""></a>
+                                            <!-- <a href="#"><img class="rounded-circle" src="" alt=""></a> -->
                                         </div>
                                     </td>
-                                {% for person in persons.all %}
                                     <td> #5469 </td>
-                                    <td>  <span class="name">{{ persons.name }}</span> </td>
-                                    <td> <span class="product">iMax</span> </td>
-                                    <td><span class="count">231</span></td>
-                                    <td> <span class="product">iMax</span> </td>
+                                    <td>  <span class="name">{{ personDash.name }}</span> </td>
+                                    <td> <span class="product">{{ personDash.name }}</span> </td>
+                                    <td><span class="count">{{ personDash.name }}</span></td>
+                                    <td> <span class="product">{{ personDash.name }}</span> </td>
                                     <td>
                                         <span class="badge badge-success">Complete</span>
                                     </td>
                                 {% endfor %}
                                 </tr>
+                                    {% if users.has_other_pages %}
+                                    <ul class="pagination">
+                                        {% if users.has_previous %}
+                                        <li><a href="?page={{ personDash.previous_page_number }}">&laquo;</a></li>
+                                        {% else %}
+                                        <li class="disabled"><span>&laquo;</span></li>
+                                        {% endif %}
+                                        {% for i in users.paginator.page_range %}
+                                        {% if users.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                        {% else %}
+                                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% if users.has_next %}
+                                        <li><a href="?page={{ personDash.next_page_number }}">&raquo;</a></li>
+                                        {% else %}
+                                        <li class="disabled"><span>&raquo;</span></li>
+                                        {% endif %}
+                                    </ul>
+                                    {% endif %}
                                 <tr>
                                     <td scope="row" class="serial">2.</td>
                                     <td class="avatar">
