@@ -32,3 +32,7 @@ urlpatterns = [
     # path('', dashboard.views.dashboard, name='user_login'),
     # path('^', include(router.urls)),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, documentroot=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, documentroot=settings.MEDIA_ROOT)

@@ -530,14 +530,14 @@
                                 {% for person in personlist %}
                                 <tr>
                                 
-                                    <td scope="row" class="pagination">1.</td>
+                                    <td scope="row" class="pagination"><ul></ul></td>
                                     <td class="avatar">
                                         <div class="round-img">
                                             <!-- <a href="#"><img class="rounded-circle" src="{% static 'images/avatar/1.jpg' %}" alt=""></a> -->
-                                            <!-- <a href="#"><img class="rounded-circle" src="" alt=""></a> -->
+                                            <a href="#"><img class="rounded-circle" src="{{ person.image }}" alt=""></a>
                                         </div>
                                     </td>
-                                    <td> #5469 </td>
+                                    <td> {{ person.person_id }} </td>
                                     <td>  <span class="name">{{ person.name }}</span> </td>
                                     <td> <span class="product">{{ person.surname }}</span> </td>
                                     <td><span class="count">{{ person.name }}</span></td>
